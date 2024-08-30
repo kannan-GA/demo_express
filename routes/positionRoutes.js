@@ -48,8 +48,14 @@ const {
 
 const router = express.Router();
 
-// Define routes relative to /cities
-router.post("/save-position", savePosition); // Accessible at /save-position
-router.get("/cities", getCities); // Accessible at /cities
+// // Define routes relative to /cities
+// router.post("/save-position", savePosition); // Accessible at /save-position
+// router.get("/cities", getCities); // Accessible at /cities
+
+// Define routes
+router.post("/save-position", savePosition); // Save position
+router.get("/cities", getCities); // Get all cities
+router.post("/cities", createCity); // Create a new city
+router.delete("/cities/:id", deleteCity); // Delete a city by ID
 
 module.exports = router;

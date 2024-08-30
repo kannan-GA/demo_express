@@ -266,7 +266,35 @@ const getCities = async (req, res) => {
   }
 };
 
+const createCity = async (req, res) => {
+  try {
+    const newCityData = req.body; // Get city data from request body
+    const newCity = new City(newCityData); // Create a new City instance
+    await newCity.save(); // Save the new city to the database
+    res.status(201).json(newCity); // Respond with the created city
+  } catch (error) {
+    console.error("Error creating city:", error); // Log error details
+    res.status(500).json({ error: "Failed to create city" }); // Respond with error message
+  }
+};
+
+const deleteCity = async (req, res) => {
+  try {
+    const { id } = req.params; // Get city ID from request parameters
+    const result = await City.findByIdAndDelete(id); // Find and delete the city by ID
+    if (!result) {
+      return res.status(404).json({ error: "City not found" }); // City not found
+    }
+    res.status(200).json({ message: "City deleted successfully" }); // Respond with success message
+  } catch (error) {
+    console.error("Error deleting city:", error); // Log error details
+    res.status(500).json({ error: "Failed to delete city" }); // Respond with error message
+  }
+};
+
 module.exports = {
   savePosition,
   getCities,
+  createCity,
+  deleteCity,
 };
