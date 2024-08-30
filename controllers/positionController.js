@@ -266,10 +266,41 @@ const getCities = async (req, res) => {
   }
 };
 
+// const createCity = async (req, res) => {
+//   try {
+//     const newCityData = req.body; // Get city data from request body
+//     const newCity = new City(newCityData); // Create a new City instance
+//     await newCity.save(); // Save the new city to the database
+//     res.status(201).json(newCity); // Respond with the created city
+//   } catch (error) {
+//     console.error("Error creating city:", error); // Log error details
+//     res.status(500).json({ error: "Failed to create city" }); // Respond with error message
+//   }
+// };
+
 const createCity = async (req, res) => {
   try {
-    const newCityData = req.body; // Get city data from request body
-    const newCity = new City(newCityData); // Create a new City instance
+    const { name, country, emoji, date, notes, position } = req.body;
+
+    // Validate position object
+    if (
+      !position ||
+      typeof position.lat !== "number" ||
+      typeof position.lng !== "number"
+    ) {
+      return res.status(400).json({ error: "Invalid position data" });
+    }
+
+    // Create a new City instance with position data
+    const newCity = new City({
+      name,
+      country,
+      emoji,
+      date,
+      notes,
+      position, // Include position object with lat and lng
+    });
+
     await newCity.save(); // Save the new city to the database
     res.status(201).json(newCity); // Respond with the created city
   } catch (error) {
