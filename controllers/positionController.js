@@ -226,6 +226,19 @@ const savePosition = async (req, res) => {
   }
 };
 
+// app.post("/save-position", async (req, res) => {
+//   console.log("Received request:", req.body); // Log incoming request
+//   try {
+//     const positionData = req.body;
+//     const newPosition = new Position(positionData);
+//     await newPosition.save();
+//     res.status(200).json({ message: "Position saved successfully" });
+//   } catch (error) {
+//     console.error("Error saving position:", error); // Log the error
+//     res.status(500).json({ error: "Failed to save position" });
+//   }
+// });
+
 const getCities = async (req, res) => {
   try {
     const cities = await City.find({});
