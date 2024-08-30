@@ -44,6 +44,8 @@ const express = require("express");
 const {
   savePosition,
   getCities,
+  createCity,
+  deleteCity,
 } = require("../controllers/positionController");
 
 const router = express.Router();
