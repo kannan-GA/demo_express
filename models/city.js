@@ -36,6 +36,6 @@ const citySchema = new mongoose.Schema({
   id: String,
 });
 
-const City = mongoose.model("City", citySchema);
+const City = mongoose.model("city", citySchema);
 
 module.exports = City;
