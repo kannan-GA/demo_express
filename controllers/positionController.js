@@ -215,13 +215,31 @@
 const City = require("../models/city");
 const Position = require("../models/position");
 
+// const savePosition = async (req, res) => {
+//   try {
+//     const positionData = req.body; // Assuming position data comes from the request body
+//     console.log(positionData);
+//     const newPosition = new Position(positionData);
+//     await newPosition.save();
+//     res.status(200).json({ message: "Position saved successfully" });
+//   } catch (err) {
+//     res.status(500).json({ error: "Failed to save position" });
+//   }
+// };
+
 const savePosition = async (req, res) => {
   try {
-    const positionData = req.body; // Assuming position data comes from the request body
-    const newPosition = new Position(positionData);
+    const { userId, position } = req.body; // Destructure the position from the body
+    console.log(position); // Check if position object has lat and lng
+    const newPosition = new Position({
+      userId,
+      lat: position.lat,
+      lng: position.lng,
+    });
     await newPosition.save();
     res.status(200).json({ message: "Position saved successfully" });
   } catch (err) {
+    console.error("Error saving position:", err); // Log error details
     res.status(500).json({ error: "Failed to save position" });
   }
 };
