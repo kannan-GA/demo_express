@@ -24,6 +24,7 @@
 const mongoose = require("mongoose");
 
 const citySchema = new mongoose.Schema({
+  id: { type: String, required: true, unique: true }, // Custom id field
   name: String,
   country: String,
   emoji: String,

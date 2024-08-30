@@ -215,6 +215,12 @@
 const City = require("../models/city");
 const Position = require("../models/position");
 
+const crypto = require("crypto"); // Node.js built-in module for generating unique IDs
+
+const generateCustomId = () => {
+  return crypto.randomBytes(8).toString("hex"); // Generate a unique ID
+};
+
 // const savePosition = async (req, res) => {
 //   try {
 //     const positionData = req.body; // Assuming position data comes from the request body
@@ -291,8 +297,11 @@ const createCity = async (req, res) => {
       return res.status(400).json({ error: "Invalid position data" });
     }
 
+    const customId = generateCustomId();
+
     // Create a new City instance with position data
     const newCity = new City({
+      id: customId, // Use the generated custom ID
       name,
       country,
       emoji,
