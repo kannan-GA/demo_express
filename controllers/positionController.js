@@ -236,7 +236,7 @@ const generateCustomId = () => {
 const savePosition = async (req, res) => {
   try {
     const { userId, position } = req.body; // Destructure the position from the body
-    console.log(position); // Check if position object has lat and lng
+    // console.log(position); // Check if position object has lat and lng
     const newPosition = new Position({
       userId,
       lat: position.lat,
